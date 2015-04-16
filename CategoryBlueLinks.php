@@ -45,7 +45,7 @@ function efCategoryBlueLinks( $skin, $target, &$text, &$customAttribs, &$query, 
 	}
 
 	// only affects user and category namespace
-	if ( $target->getNamespace() != NS_USER && $$target->getNamespace() != NS_CATEGORY){
+	if ( $target->getNamespace() != NS_USER && $target->getNamespace() != NS_CATEGORY){
 		return true;
 	}
 	// only affects "redlinks"
@@ -54,7 +54,7 @@ function efCategoryBlueLinks( $skin, $target, &$text, &$customAttribs, &$query, 
 	}
 
 	// only affects non-existing Category pages that has content
-	if ( $$target->getNamespace() == NS_CATEGORY && Category::newFromTitle( $target )->getPageCount() == 0 ){
+	if ( $target->getNamespace() == NS_CATEGORY && Category::newFromTitle( $target )->getPageCount() == 0 ){
 		return true;
 	}
 
