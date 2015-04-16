@@ -43,10 +43,21 @@ function efCategoryBlueLinks( $skin, $target, &$text, &$customAttribs, &$query, 
 	if ( is_null( $target ) ) {
 		return true;
 	}
-	// only affects non-existing Category pages that has content
-	if ( $target->getNamespace() != NS_CATEGORY || $target->getNamespace() != NS_USER || $target->exists() || Category::newFromTitle( $target )->getPageCount() == 0 ) {
+
+	// only affects user and category namespace
+	if ( $target->getNamespace() != NS_USER && $$target->getNamespace() != NS_CATEGORY){
 		return true;
 	}
+	// only affects "redlinks"
+	if ( $target->exists() ) {
+		return true;
+	}
+
+	// only affects non-existing Category pages that has content
+	if ( $$target->getNamespace() == NS_CATEGORY && Category::newFromTitle( $target )->getPageCount() == 0 ){
+		return true;
+	}
+
 	// remove "broken" assumption/override
 	$brokenKey = array_search( 'broken', $options );
 	if ( $brokenKey !== false ) {
